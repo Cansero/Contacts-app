@@ -1,5 +1,4 @@
 <?php
-
 require "database.php";
 
 $contacts = $conn->query("SELECT * FROM contacts");
@@ -33,7 +32,7 @@ $contacts = $conn->query("SELECT * FROM contacts");
             <p><?= $contact["number"] ?></p>
             <div class="buttons">
                 <a class="btn" href="#">Edit contact</a>
-                <a class="btn danger" href="#">Delete contact</a>
+                <a class="btn danger" href="delete.php?id=<?= $contact["id"] ?>">Delete contact</a>
             </div>
         </div>
         <?php endforeach ?>

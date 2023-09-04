@@ -1,5 +1,4 @@
 <?php
-
 $host = "localhost";
 $database = "contacts_app";
 $user = "root";
