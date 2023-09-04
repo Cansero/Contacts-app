@@ -31,7 +31,7 @@ $contacts = $conn->query("SELECT * FROM contacts");
             <h3><?= $contact["name"] ?></h3>
             <p><?= $contact["number"] ?></p>
             <div class="buttons">
-                <a class="btn" href="#">Edit contact</a>
+                <a class="btn" href="edit.php?id=<?= $contact["id"] ?>">Edit contact</a>
                 <a class="btn danger" href="delete.php?id=<?= $contact["id"] ?>">Delete contact</a>
             </div>
         </div>
