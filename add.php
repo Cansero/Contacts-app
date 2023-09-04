@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="add.php" method="post">
                 <?php if ($error):?>
                     <p><?= $error ?></p>
-                <? endif ?>
+                <?php endif ?>
                 <div class="formitem">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name">
