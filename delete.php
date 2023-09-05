@@ -16,3 +16,4 @@ $statament = $conn->prepare("DELETE FROM contacts WHERE id = :id");
 $statament->execute([":id" => $id]);
 
 header("Location: index.php");
+?>
