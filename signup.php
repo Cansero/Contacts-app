@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    if (empty($user) || empty($email) || empty($password)) {
+    if (empty($name) || empty($email) || empty($password)) {
         $error = "Please fill all the fields";
     } else if (!str_contains($email, "@")) {
         $error = "Email not valid";
@@ -25,6 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ":email" => $email,
                 ":password" => password_hash($password, PASSWORD_BCRYPT)
             ]);
+
+            $statament = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $statament->execute([":email" => $email]);
+            $user = $statament->fetch(PDO::FETCH_ASSOC);
+
+            session_start();
+
+            $_SESSION["user"] = $user;
 
             header("Location: index.php");
         }

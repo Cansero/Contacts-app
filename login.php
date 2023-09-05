@@ -1,6 +1,37 @@
 <?php
 require "database.php";
-$error = null
+
+$error = null;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    if (empty($email) || empty($password)) {
+        $error = "Please fill all the fields";
+    } else if (!str_contains($email, "@")) {
+        $error = "Not valid information";
+    } else {
+        $statament = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $statament->execute([":email" => $email]);
+
+        if ($statament->rowCount() == 0) {
+            $error = "Not valid information";
+        } else {
+            $user = $statament->fetch(PDO::FETCH_ASSOC);
+
+            if (!password_verify($password, $user["password"])) {
+                $error = "Not valid information";
+            } else {
+                session_start();
+                unset($user["password"]);
+                $_SESSION["user"] = $user;
+
+                header("Location: index.php");
+            }
+        }
+    }
+}
 
 ?>
 

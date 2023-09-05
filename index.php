@@ -1,6 +1,8 @@
 <?php
 require "database.php";
 
+session_start();
+
 $contacts = $conn->query("SELECT * FROM contacts");
 
 ?>
